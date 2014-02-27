@@ -16,15 +16,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+include_recipe "windows::reboot_handler"
 
-%w{ FS-FileServer Backup Backup-Tools Net-Framework-Core Powershell-ISE WSRM GPMC RSAT-AD-Tools RSAT-AD-PowerShell RSAT-ADDS-Tools RSAT-ADLDS }.each do |feature|
-  windows_feature feature do
-    action :install
-    not_if {reboot_pending?}
-  end
+powershell "default" do
+  code <<-EOH
+  Import-Module ServerManager
+  Add-WindowsFeature FS-FileServer
+  Add-WindowsFeature Backup
+  Add-WindowsFeature Backup-Tools
+  Add-WindowsFeature Net-Framework-Core
+  Add-WindowsFeature Powershell-ISE
+  Add-WindowsFeature WSRM
+  Add-WindowsFeature GPMC
+  Add-WindowsFeature RSAT-AD-Tools
+  Add-WindowsFeature RSAT-AD-PowerShell
+  Add-WindowsFeature RSAT-ADDS-Tools
+  Add-WindowsFeature RSAT-ADLDS
+  EOH
+  not_if {reboot_pending?}
 end
 
 windows_reboot 60 do
-  reason 'Chef said to'
+  reason 'Chef Pigram said to'
   only_if {reboot_pending?}
 end
