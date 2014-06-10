@@ -32,8 +32,6 @@ powershell_script "default" do
  not_if {reboot_pending?}
 end
 
-
-
 powershell_script "default" do
   code <<-EOH
   Import-Module ServerManager
@@ -41,8 +39,6 @@ powershell_script "default" do
   EOH
   not_if {reboot_pending?}
 end
-
-
 
 powershell_script "default" do
   code <<-EOH
@@ -52,8 +48,6 @@ powershell_script "default" do
   not_if {reboot_pending?}
 end
 
-
-
 powershell_script "default" do
   code <<-EOH
   Import-Module ServerManager
@@ -62,9 +56,6 @@ powershell_script "default" do
   not_if {reboot_pending?}
 end
 
-
-
-
 powershell_script "default" do
   code <<-EOH
   Import-Module ServerManager
@@ -72,9 +63,6 @@ powershell_script "default" do
   EOH
   not_if {reboot_pending?}
 end
-
-
-
 
 windows_reboot 60 do
   reason 'Chef Pigram said to'
