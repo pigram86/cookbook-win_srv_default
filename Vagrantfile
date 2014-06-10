@@ -1,8 +1,8 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-Vagrant.require_plugin "vagrant-omnibus"
-Vagrant.require_plugin "vagrant-windows"
+#Vagrant.require_plugin "vagrant-omnibus"
+#Vagrant.require_plugin "vagrant-windows"
 #Vagrant.require_plugin "vagrant-berkshelf"
 
 
@@ -11,16 +11,16 @@ Vagrant.configure("2") do |config|
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
   
-  config.omnibus.chef_version = :latest
-  config.vm.hostname = "windows-server-default-berkshelf"
+  #config.omnibus.chef_version = :latest
+  config.vm.hostname = "w2k8r2"
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "chef-w2012"
+  config.vm.box = "chef-w2k8r2"
   #config.vm.boot_mode = :gui
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
-  config.vm.box_url = "/Users/toddpigram/veewee/chef-w2012.box"
+  config.vm.box_url = "/Users/toddpigram/boxes/chef-w2k8r2.box"
   config.vm.guest = :windows
   # config.vm.network :private_network, ip: "10.0.2.15"
   #config.vm.forward_port 3389, 3390, :name => "rdp", :auto => true
@@ -40,7 +40,7 @@ Vagrant.configure("2") do |config|
   # Bridged networks make the machine appear as another physical device on
   # your network.
 
-  # config.vm.network :public_network
+  config.vm.network :public_network
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
@@ -56,13 +56,13 @@ Vagrant.configure("2") do |config|
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
   #
-  #config.vm.provider :virtualbox do |vb|
+  config.vm.provider :virtualbox do |vb|
   #   # Don't boot with headless mode
-  #   vb.gui = true
+    vb.gui = true
   #
   #   # Use VBoxManage to customize the VM. For example to change memory:
-  # vb.customize ["modifyvm", :id, "--memory", "1024"]
-  #end
+    vb.customize ["modifyvm", :id, "--memory", "1024"]
+  end
   #
   # View the documentation for the provider you're using for more
   # information on available options.
@@ -85,7 +85,7 @@ Vagrant.configure("2") do |config|
   # to skip installing and copying to Vagrant's shelf.
   # config.berkshelf.except = []
 
-  #config.vm.provision :chef_solo do |chef|
+  config.vm.provision :chef_solo do |chef|
   #  chef.json = {
   #    :mysql => {
   #      :server_root_password => 'rootpass',
@@ -94,8 +94,8 @@ Vagrant.configure("2") do |config|
   #    }
   #  }
 
-   #chef.run_list = [
-     # "recipe[windows_server_default::default]"
-    #]
-  #end
+   chef.run_list = [
+      "recipe[windows_server_default::default]"
+    ]
+  end
 end

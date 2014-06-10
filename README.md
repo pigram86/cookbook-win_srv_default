@@ -53,15 +53,54 @@ end
 
 windows_server_default::w2k8r2.rb
 
-%w{ FS-FileServer Backup Backup-Tools Net-Framework-Core Powershell-ISE WSRM GPMC RSAT-AD-Tools RSAT-AD-PowerShell RSAT-ADDS-Tools RSAT-ADLDS }.each do |feature|
-  windows_feature feature do
-    action :install
-    not_if {reboot_pending?}
-  end
+powershell_script "default" do
+  code <<-EOH
+  Import-Module ServerManager
+  Add-WindowsFeature FS-FileServer
+  Add-WindowsFeature Backup
+  Add-WindowsFeature Backup-Tools
+  Add-WindowsFeature Net-Framework-Core
+  Add-WindowsFeature Powershell-ISE
+  Add-WindowsFeature WSRM
+  Add-WindowsFeature GPMC
+  EOH
+ not_if {reboot_pending?}
+end
+
+powershell_script "default" do
+  code <<-EOH
+  Import-Module ServerManager
+  Add-WindowsFeature RSAT-AD-Tools
+  EOH
+  not_if {reboot_pending?}
+end
+
+powershell_script "default" do
+  code <<-EOH
+  Import-Module ServerManager
+  Add-WindowsFeature RSAT-AD-PowerShell
+  EOH
+  not_if {reboot_pending?}
+end
+
+powershell_script "default" do
+  code <<-EOH
+  Import-Module ServerManager
+  Add-WindowsFeature RSAT-ADDS-Tools
+  EOH
+  not_if {reboot_pending?}
+end
+
+powershell_script "default" do
+  code <<-EOH
+  Import-Module ServerManager
+  Add-WindowsFeature RSAT-ADLDS
+  EOH
+  not_if {reboot_pending?}
 end
 
 windows_reboot 60 do
-  reason 'Chef said to'
+  reason 'Chef Pigram said to'
   only_if {reboot_pending?}
 end
 

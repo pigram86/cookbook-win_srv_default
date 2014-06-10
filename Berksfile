@@ -1,7 +1,7 @@
-site :opscode
+source "http://api.berkshelf.com"
 
 metadata
 
-cookbook 'chef_handler', '~> 1.1.5'
-cookbook 'windows',  '~> 1.30.0'
-cookbook 'powershell', '~> 3.0.0'
+cookbook 'chef_handler'
+cookbook 'windows'
+cookbook 'powershell'

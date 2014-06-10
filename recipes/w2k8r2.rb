@@ -18,7 +18,7 @@
 #
 
 
-powershell "default" do
+powershell_script "default" do
   code <<-EOH
   Import-Module ServerManager
   Add-WindowsFeature FS-FileServer
@@ -28,13 +28,53 @@ powershell "default" do
   Add-WindowsFeature Powershell-ISE
   Add-WindowsFeature WSRM
   Add-WindowsFeature GPMC
+  EOH
+ not_if {reboot_pending?}
+end
+
+
+
+powershell_script "default" do
+  code <<-EOH
+  Import-Module ServerManager
   Add-WindowsFeature RSAT-AD-Tools
+  EOH
+  not_if {reboot_pending?}
+end
+
+
+
+powershell_script "default" do
+  code <<-EOH
+  Import-Module ServerManager
   Add-WindowsFeature RSAT-AD-PowerShell
+  EOH
+  not_if {reboot_pending?}
+end
+
+
+
+powershell_script "default" do
+  code <<-EOH
+  Import-Module ServerManager
   Add-WindowsFeature RSAT-ADDS-Tools
+  EOH
+  not_if {reboot_pending?}
+end
+
+
+
+
+powershell_script "default" do
+  code <<-EOH
+  Import-Module ServerManager
   Add-WindowsFeature RSAT-ADLDS
   EOH
   not_if {reboot_pending?}
 end
+
+
+
 
 windows_reboot 60 do
   reason 'Chef Pigram said to'
