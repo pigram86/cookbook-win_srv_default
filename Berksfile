@@ -1,7 +1,3 @@
-source "http://api.berkshelf.com"
+source "https://supermarket.getchef.com"
 
 metadata
-
-cookbook 'chef_handler'
-cookbook 'windows'
-cookbook 'powershell'
