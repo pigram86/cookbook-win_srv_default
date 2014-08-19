@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: windows_server_default
+# Cookbook Name:: win_srv_default
 # Recipe:: default
 #
-# Copyright (C) 2014 Todd Pigram
+# Copyright (C) 2013-2014 Todd Pigram
 # 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,11 +18,11 @@
 #
 case node['platform_version']
 when "6.3.9600"
-  include_recipe "windows_server_default::w2012r2"
+  include_recipe "win_srv_default::w2012r2"
 when "6.2.9200"
-  include_recipe "windows_server_default::w2012"
+  include_recipe "win_srv_default::w2012"
 when "6.1.7601"
-  include_recipe "windows_server_default::w2k8r2"
+  include_recipe "win_srv_default::w2k8r2"
 end
 
   

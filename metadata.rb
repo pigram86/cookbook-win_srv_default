@@ -1,4 +1,4 @@
-name             'windows_server_default'
+name             'win_srv_default'
 maintainer       'Todd Pigram'
 maintainer_email 'todd@toddpigram.com'
 license          'Apache 2.0'

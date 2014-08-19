@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: windows_server_default
+# Cookbook Name:: win_srv_default
 # Recipe:: w2k8r2
 #
-# Copyright (C) 2014 Todd Pigram
+# Copyright (C) 2013-2014 Todd Pigram
 # 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -64,7 +64,7 @@ powershell_script "default" do
   not_if {reboot_pending?}
 end
 
-windows_reboot 60 do
+windows_reboot 30 do
   reason 'Chef said to'
   only_if {reboot_pending?}
 end

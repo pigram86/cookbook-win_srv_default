@@ -20,18 +20,18 @@ Cookbooks
 Recipes
 =======
 
-windows_server_default::default.rb
+win_srv_default::default.rb
 ----------------------------------
 * case node['platform_version']
 * when "6.3.9600"
-*   include_recipe "windows_server_default::w2012r2"
+*   include_recipe "win_srv_default::w2012r2"
 * when "6.2.9200"
-*   include_recipe "windows_server_default::w2012"
+*   include_recipe "win_srv_default::w2012"
 * when "6.1.7601"
-*   include_recipe "windows_server_default::w2k8r2"
+*   include_recipe "win_srv_default::w2k8r2"
 * end
 
-windows_server_default::w2012.rb
+win_srv_default::w2012.rb
 --------------------------------
 * %w{ File-Services CoreFileServer  WindowsServerBackup NetFx3ServerFeatures NetFx3 ServerManager-Core-RSAT ServerManager-Core-RSAT-Role-Tools  RSAT-AD-Tools-Feature RSAT-ADDS-Tools-Feature }.each do |feature|
 *  windows_feature feature do
@@ -45,7 +45,7 @@ windows_server_default::w2012.rb
 *   only_if {reboot_pending?}
 * end
 
-windows_server_default::w2012r2.rb
+win_srv_default::w2012r2.rb
 ----------------------------------
 * %w{ File-Services CoreFileServer  WindowsServerBackup NetFx3ServerFeatures NetFx3 ServerManager-Core-RSAT ServerManager-Core-RSAT-Role-Tools RSAT-AD-Tools-Feature RSAT-ADDS-Tools-Feature }.each do |feature|
 *  windows_feature feature do
@@ -60,7 +60,7 @@ windows_server_default::w2012r2.rb
 *   only_if {reboot_pending?}
 * end
 
-windows_server_default::w2k8r2.rb
+win_srv_default::w2k8r2.rb
 ---------------------------------
 * powershell_script "default" do
 *   code <<-EOH
@@ -116,15 +116,15 @@ windows_server_default::w2k8r2.rb
 Usage
 =====
 
-windows_server_default::default.rb
+win_srv_default::default.rb
 ----------------------------------
 
-* Include `windows_server_default` in your node's `run_list`:
+* Include `wib_srv_default` in your node's `run_list`:
 
 ```json
  {
   "run_list": [
-    "recipe[windows_server_default::default]"
+    "recipe[win_srv_default::default]"
    ]
  }
  ```

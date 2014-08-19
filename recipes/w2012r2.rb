@@ -1,8 +1,8 @@
 #
-# Cookbook Name:: windows_server_default
+# Cookbook Name:: win_srv_default
 # Recipe:: w2012r2
 #
-# Copyright (C) 2014 Todd Pigram
+# Copyright (C) 2013-2014 Todd Pigram
 # 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,8 +16,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
-
 %w{ File-Services CoreFileServer  WindowsServerBackup NetFx3ServerFeatures NetFx3 ServerManager-Core-RSAT ServerManager-Core-RSAT-Role-Tools RSAT-AD-Tools-Feature RSAT-ADDS-Tools-Feature }.each do |feature|
   windows_feature feature do
     action :install
@@ -25,8 +23,7 @@
   end
 end
 
-
-windows_reboot 60 do
+windows_reboot 30 do
   reason 'Chef said to'
   only_if {reboot_pending?}
 end
