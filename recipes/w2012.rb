@@ -28,7 +28,7 @@
 end
 
 windows_reboot 60 do
-  reason "Chef Pigram said to"
+  reason "Chef said to"
   only_if {reboot_pending?}
 end
 

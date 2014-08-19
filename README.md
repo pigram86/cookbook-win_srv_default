@@ -17,8 +17,8 @@ Cookbooks
 * windows
 * powershell
 
-Usage
-=====
+Recipes
+=======
 
 windows_server_default::default.rb
 ----------------------------------
@@ -112,6 +112,9 @@ windows_server_default::w2k8r2.rb
 *   reason 'Chef Pigram said to'
 *   only_if {reboot_pending?}
 * end
+
+Usage
+=====
 
 windows_server_default::default.rb
 ----------------------------------
